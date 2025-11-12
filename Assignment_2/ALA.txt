@@ -1,0 +1,2 @@
+INCR:&ARG1,&ARG2
+SWAP:&A,&B,&TEMP

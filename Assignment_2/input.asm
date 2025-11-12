@@ -1,0 +1,15 @@
+START 100
+MACRO INCR &ARG1,&ARG2
+L1    LDA  &ARG1
+      ADD  =1
+      STA  &ARG1
+      MOV  &ARG2, L1
+MEND
+MACRO SWAP &A,&B,&TEMP=R0
+      MOV &TEMP,&A
+      MOV &A,&B
+      MOV &B,&TEMP
+MEND
+INCR X,Y
+SWAP A,B
+END

@@ -1,0 +1,66 @@
+import java.io.*;
+import java.util.*;
+
+// Class to hold macro lines
+class MDT {
+    String value;
+
+    MDT(String value) {
+        this.value = value;
+    }
+
+   @Override
+   public String toString() {
+  return value;
+   }
+}
+
+public class Main{
+
+    public static void main(String[] args) {
+        List<MDT> mdtTable = new ArrayList<>();
+        BufferedReader br = null;
+
+        try {
+            // Open source file for reading macro definitions
+            br = new BufferedReader(new FileReader("input.txt"));
+
+            String line;
+            boolean insideMacro = false;
+
+            while ((line = br.readLine()) != null) {
+                line = line.trim();
+
+                if (line.equalsIgnoreCase("MACRO")) {
+                    insideMacro = true;  // Start capturing macro
+                    continue;
+                }
+
+                if (line.equalsIgnoreCase("MEND")) {
+                    mdtTable.add(new MDT("MEND"));  // End of macro
+                    insideMacro = false;
+                    continue;
+                }
+
+                if (insideMacro) {
+                    mdtTable.add(new MDT(line));  // Add line to MDT
+                }
+            }
+
+            // Display MDT contents
+            System.out.println("Macro Definition Table (MDT):");
+            for (int i = 0; i < mdtTable.size(); i++) {
+                System.out.println(i + "\t" + mdtTable.get(i));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null) br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+START 100
+L1    LDA  X
+ADD  =1
+STA  X
+MOV  Y, L1
+MOV R0,A
+MOV A,B
+MOV B,R0
+END
